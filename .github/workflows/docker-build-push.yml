@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Push Docker Image and Deploy Flask Python API to AWS
 
 on:
   push:
@@ -33,3 +33,12 @@ jobs:
         tags: |
           omoi/webcrawler:latest
           omoi/webcrawler:${{ github.sha }}
+
+    - name: Deploy to AWS server
+        run: |
+          echo "Creating test_deployment file on AWS server"
+          echo "$AWS_SSH_KEY" > key.pem
+          chmod 400 key.pem
+          scp -i key.pem your_file.txt ubuntu@13.42.225.186:~/
+        env:
+          AWS_SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
