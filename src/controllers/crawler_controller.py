@@ -62,7 +62,7 @@ def handle_check():
             response=json.dumps({
                 "status": "success",
                 "message": "Data Loaded",
-                "payload": "Hello, I'm awake",
+                "payload": "Hello there",
                 "iat": datetime.utcnow(),
             }),
             status=201,

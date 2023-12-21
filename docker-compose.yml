@@ -5,6 +5,5 @@ services:
     image: omoi/webcrawler:latest
     container_name: omoi-webcrawler
     ports:
-      - "5001:5001"
       - "5000:5000"
       - "3000:3000"
