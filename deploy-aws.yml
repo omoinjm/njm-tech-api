@@ -16,6 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create deployment file
+        run: |
+          echo "This is the content of your_file.txt" > your_file.txt
+
       - name: Deploy to AWS server
         run: |
           echo "Creating test_deployment file on AWS server"
