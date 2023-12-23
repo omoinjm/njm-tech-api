@@ -10,6 +10,9 @@ RUN apt-get update && \
 # Install hakrawler
 RUN go install github.com/hakluke/hakrawler@latest
 
+# Install gau
+RUN go install github.com/lc/gau/v2/cmd/gau@latest
+
 # Set the working directory to /app
 WORKDIR /app
 
