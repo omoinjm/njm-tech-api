@@ -3,10 +3,9 @@ from src.services.crawler_service import Crawler
 from datetime import datetime
 import os
 
-# user controller blueprint to be registered with api blueprint
+# bash cmd controller blueprint to be registered with api blueprint
 bash_cmd = Blueprint("bash_cmd", __name__)
 
-# route for signup api/users/signup
 @bash_cmd.route('/crawler', methods = ["POST"])
 def handle_crawler():
     try: 
@@ -53,7 +52,6 @@ def handle_crawler():
                 mimetype='application/json'
             )
     
-# route for signup api/users/signup
 @bash_cmd.route('/health_check', methods = ["GET"])
 def handle_check():
     try:             
