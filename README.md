@@ -15,7 +15,7 @@
 1. Clone the repository
 
 ```bash
-git clone https://github.com/AshleyAlexJacob/Flask-API-Folder-Guide-2023
+git clone https://github.com/omoinjm/automation-apis.git
 ```
 
 2. Create python virutal environment
