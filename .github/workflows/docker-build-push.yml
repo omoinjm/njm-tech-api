@@ -5,6 +5,21 @@ on:
     branches:
       - main
 
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_IMAGE: omoi/automation-apis:latest
+  
+  AWS_DIR: ~/docker/automation-apis
+  AWS_SERVER: ${{ secrets.AWS_SERVER }}
+  AWS_SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
+  
+  PYTHON_ENV: ${{ secrets.PYTHON_ENV }}
+  
+  FLASK_APP: ${{ secrets.FLASK_APP }}
+  FLASK_ENV: ${{ secrets.FLASK_ENV }}
+  FLASK_DEBUG: ${{ secrets.FLASK_DEBUG }}
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -26,16 +41,20 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t omoi/webcrawler:latest .
+      run: |
+        docker build \
+        --build-arg PYTHON_ENV=${{ env.PYTHON_ENV }} \
+        --build-arg FLASK_APP=${{ env.FLASK_APP }} \
+        --build-arg FLASK_ENV=${{ env.FLASK_ENV }} \
+        --build-arg FLASK_DEBUG=${{ env.FLASK_DEBUG }} \
+        -t ${{ env.DOCKER_IMAGE }} .
 
     - name: Push Docker Image
-      run: docker push omoi/webcrawler:latest
+      run: docker push ${{ env.DOCKER_IMAGE }}
           
-    - name: Deploy to AWS server
-      run: |
-        echo "$AWS_SSH_KEY" > key.pem
-        chmod 400 key.pem
-        scp -o StrictHostKeyChecking=no -i key.pem docker-compose.yml ubuntu@13.42.225.186:~/docker/webcrawler
-        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@13.42.225.186 'cd ~/docker/webcrawler && docker-compose down && docker-compose pull && docker-compose up -d'
-      env:
-        AWS_SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
+    # - name: Deploy to AWS server
+    #   run: |
+    #     echo "${{ env.AWS_SSH_KEY }}" > key.pem
+    #     chmod 400 key.pem
+    #     scp -o StrictHostKeyChecking=no -i key.pem docker-compose.yml ubuntu@${{ env.AWS_SERVER }}:${{ env.AWS_DIR }}
+    #     ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ env.AWS_SERVER }} 'cd ${{ env.AWS_DIR }} && docker-compose down && docker-compose pull && docker-compose up -d'

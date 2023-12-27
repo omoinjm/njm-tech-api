@@ -22,11 +22,17 @@ COPY ./ /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Set up environment variables using build arguments
+ARG PYTHON_ENV
+ARG FLASK_APP
+ARG FLASK_ENV
+ARG FLASK_DEBUG
+
 # Set up environment variables
-ENV PYTHON_ENV='PROD'
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
-ENV FLASK_DEBUG=0
+ENV PYTHON_ENV=${PYTHON_ENV}  
+ENV FLASK_APP=${FLASK_APP}
+ENV FLASK_ENV=${FLASK_ENV}
+ENV FLASK_DEBUG=${FLASK_DEBUG}
 
 # Add the Go bin directory to the PATH
 ENV PATH=$PATH:/root/go/bin/
