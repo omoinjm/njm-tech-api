@@ -56,7 +56,6 @@ jobs:
       run: |
         echo "${{ env.AWS_SSH_KEY }}" > key.pem
         chmod 400 key.pem
-        cat key.pem
         ssh -i key.pem -o StrictHostKeyChecking=no -p 615 omoi@${{ env.AWS_SERVER }} 'echo Hello'
-        scp -p 615 -o StrictHostKeyChecking=no -i key.pem docker-compose.yml omoi@${{ env.AWS_SERVER }}:${{ env.AWS_DIR }}
-        ssh -o StrictHostKeyChecking=no -i key.pem -p 615 omoi@${{ env.AWS_SERVER }} 'cd ${{ env.AWS_DIR }} && docker-compose down && docker-compose pull && docker-compose up -d'
+        scp -i key.pem -o StrictHostKeyChecking=no -p 615 docker-compose.yml omoi@${{ env.AWS_SERVER }}:${{ env.AWS_DIR }}
+        #vssh -i key.pem -o StrictHostKeyChecking=no -p 615 omoi@${{ env.AWS_SERVER }} 'cd ${{ env.AWS_DIR }} && docker-compose down && docker-compose pull && docker-compose up -d'
