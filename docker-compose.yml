@@ -7,3 +7,10 @@ services:
     ports:
       - "5000:5000"
       - "3000:3000"
+    networks:
+      - nginxproxymanager_default
+
+networks:
+  nginxproxymanager_default:
+    external: true
+
