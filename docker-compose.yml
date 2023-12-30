@@ -13,4 +13,3 @@ services:
 networks:
   nginxproxymanager_default:
     external: true
-
