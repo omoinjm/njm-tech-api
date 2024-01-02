@@ -1,7 +1,7 @@
-from flask import Flask
 import os
-from src.config.config import Config
+from flask import Flask
 from dotenv import load_dotenv
+from src.config.config import Config
 
 # loading environment variables
 load_dotenv()
