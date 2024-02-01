@@ -15,7 +15,7 @@
 1. Clone the repository
 
 ```bash
-git clone https://github.com/omoinjm/automation-apis.git
+git clone https://github.com/omoinjm/njm-tech-api.git
 ```
 
 2. Create python virutal environment
@@ -31,19 +31,29 @@ Windows
 ```powershell
 venv\Scripts\activate
 ```
+
 Linux/Mac OS
-``` bash
+
+```bash
 source venv/bin/activate
 ```
+
 4. Install dependencies
-``` bash
+
+```bash
 pip install -r requirements.txt
 ```
+
 5. Run the server
+
 ```bash
 python app.py
 ```
 
+### Adding Swagger Docs to Existing Flask App
+
+Swagger lets you create an interactive docs route for your flask app. You reference a `swagger.json` file that follows the OpenAPI spec and Swagger handles the front end to make the documentation for your service more engaging and interactive.
+
 Follow Me:
 [Linkedin](https://www.linkedin.com/in/njmalaza/)
-[Medium](https://medium.com/@ashleyalexjacob/)
+

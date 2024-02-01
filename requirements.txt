@@ -2,4 +2,5 @@ flask
 gevent
 python-dotenv
 metaapi_cloud_sdk
-Flask-Restful
+flask-swagger-ui
+
