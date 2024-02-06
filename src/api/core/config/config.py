@@ -23,12 +23,10 @@ class Config:
         else:
             raise ValueError("Invalid value for PYTHON_ENV")
 
-    def swagger_ui(self):
+    def swagger_ui(self, api_url):
         SWAGGER_URL = "/api/docs"  # URL for exposing Swagger UI (without trailing '/')
 
-        API_URL = (
-            "/static/swagger.json"  # Our API url (can of course be a local resource)
-        )
+        API_URL = api_url  # Our API url (can of course be a local resource)
 
         return get_swaggerui_blueprint(
             SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
