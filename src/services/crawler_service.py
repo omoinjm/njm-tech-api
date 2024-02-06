@@ -6,7 +6,7 @@ class Crawler:
     def run_command(self, url):
         system = platform.system()
 
-        command = f"go --help"
+        command = f"git --help"
         # command = f"echo {url} | docker run --rm -i hakluke/hakrawler -subs"
 
         if system == "Windows":
