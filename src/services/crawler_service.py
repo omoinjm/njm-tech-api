@@ -1,10 +1,14 @@
 import platform
 import subprocess
+import requests
+import os
 
 
 class Crawler:
     def run_command(self, url):
         system = platform.system()
+
+        self.save_files()
 
         command = f"{url}"
         # command = f"echo {url} | docker run --rm -i hakluke/hakrawler -subs"
@@ -53,4 +57,36 @@ class Crawler:
                 parsed_data.append(json_str)
 
         return parsed_data
+
+    def save_files(self):
+        github_repo_url = "https://github.com/bartekspitza/dotfiles"
+        save_directory = "~/dotfiles"
+        self.download_github_repo_contents(github_repo_url, save_directory)
+
+    def download_file(self, url, save_path):
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(save_path, "wb") as f:
+                f.write(response.content)
+            print("File downloaded successfully.")
+        else:
+            print("Failed to download file.")
+
+    def download_github_repo_contents(self, repo_url, save_dir):
+        api_url = repo_url.replace("github.com", "api.github.com/repos") + "/contents"
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            contents = response.json()
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir)
+            for item in contents:
+                if item["type"] == "file":
+                    file_url = item["download_url"]
+                    file_name = os.path.join(save_dir, item["name"])
+                    self.download_file(file_url, file_name)
+                elif item["type"] == "dir":
+                    dir_name = os.path.join(save_dir, item["name"])
+                    self.download_github_repo_contents(item["url"], dir_name)
+        else:
+            print("Failed to fetch repository contents.")
 
