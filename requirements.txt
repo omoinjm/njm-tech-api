@@ -4,3 +4,7 @@ python-dotenv
 metaapi_cloud_sdk
 flask-swagger-ui
 
+pytest==6.1.2
+pytest-cov==2.10.1
+pytest-sugar==0.9.4
+

@@ -30,6 +30,13 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run Python app for 5 seconds
-        run: python app.py # Replace "your_script.py" with the name of your Python script or application
-        timeout-minutes: 1 # Timeout after 1 minute (adjust if needed)
+      - name: Test with PyTest
+        run: pytest --cov=app --cov-report=xml
+
+      - name: Upload artifact for deployment jobs
+        uses: actions/upload-artifact@v2
+        with:
+          name: python-app
+          path: |
+            .
+            !venv/
