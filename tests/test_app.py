@@ -11,6 +11,6 @@ def client():
 
 
 def test_api(client):
-    resp = client.get("/api/v1/crawler/url")
+    resp = client.get("/api/v1/crawler/get")
     assert resp.status_code == 200
 
