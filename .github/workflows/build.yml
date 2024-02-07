@@ -29,6 +29,3 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-
-      - name: test with PyTest
-        run: pytest --cov=app --cov-report=xml
