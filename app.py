@@ -7,8 +7,7 @@ from gevent.pywsgi import WSGIServer
 logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
-
-if config == "production":
+    if config == "production":
         http_server = WSGIServer(("", config.PORT), app)
         http_server.serve_forever()
     else:
