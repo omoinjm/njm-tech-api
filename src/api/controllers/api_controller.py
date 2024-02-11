@@ -25,7 +25,6 @@ class ApiController:
 
         swagger_url = self.config.FLASK_SWAGGER_UI
         swagger_ui = Config().swagger_ui(swagger_url)
-
         self.app.register_blueprint(swagger_ui)
         self.app.register_blueprint(self.api, url_prefix="/api/v1/")
 
