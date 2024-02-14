@@ -9,7 +9,7 @@ class ProductionConfig:
     def __init__(self):
         self.ENV = "production"
         self.DEBUG = False
-        self.PORT = 3000
+        self.PORT = os.getenv("PORT")
         self.HOST = "0.0.0.0"
         self.PYTHON_ENV = os.getenv("PYTHON_ENV")
         self.META_API_TOKEN = os.getenv("METAAPI_TOKEN")

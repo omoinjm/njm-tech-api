@@ -9,7 +9,7 @@ class DevConfig:
     def __init__(self):
         self.ENV = "development"
         self.DEBUG = True
-        self.PORT = 5000
+        self.PORT = os.getenv("PORT")
         self.HOST = "0.0.0.0"
         self.PYTHON_ENV = os.getenv("PYTHON_ENV")
         self.META_API_TOKEN = os.getenv("METAAPI_TOKEN")
