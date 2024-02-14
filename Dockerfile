@@ -41,6 +41,12 @@ ENV PATH=$PATH:/root/go/bin/
 EXPOSE 5000
 EXPOSE 3000
 
+# Expose the port for the Flask application
+EXPOSE $PORT
+
+# Run the Python application using Gunicorn
+# CMD gunicorn -b :$PORT app:app
+
 # Run the Python application (assuming app.py is your entry point)
 CMD ["python", "app.py"]
 
