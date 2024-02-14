@@ -22,12 +22,25 @@ COPY ./ /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install gunicorn
-RUN pip install gunicorn
+# Set up environment variables using build arguments
+ARG PYTHON_ENV
+ARG FLASK_APP
+ARG FLASK_ENV
+ARG FLASK_DEBUG
+
+# Set up environment variables
+ENV PYTHON_ENV=${PYTHON_ENV}  
+ENV FLASK_APP=${FLASK_APP}
+ENV FLASK_ENV=${FLASK_ENV}
+ENV FLASK_DEBUG=${FLASK_DEBUG}
+
+# Add the Go bin directory to the PATH
+ENV PATH=$PATH:/root/go/bin/
 
 # Expose the port for the Flask application
-EXPOSE $PORT
+EXPOSE 5000
+EXPOSE 3000
 
-# Run the Python application using Gunicorn
-CMD gunicorn -b :$PORT app:app
+# Run the Python application (assuming app.py is your entry point)
+CMD ["python", "app.py"]
 
