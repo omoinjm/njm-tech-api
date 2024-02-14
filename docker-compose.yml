@@ -1,12 +1,12 @@
-version: '3'
+version: "3"
 
 services:
   omoi-automation-apis:
     image: omoi/automation-apis:latest
     container_name: omoi-automation-apis
-    ports:
-      - "5000:5000"
-      - "3000:3000"
+    # ports:
+    #   - "5000:5000"
+    #   - "3000:3000"
     networks:
       - nginxproxymanager_default
 
